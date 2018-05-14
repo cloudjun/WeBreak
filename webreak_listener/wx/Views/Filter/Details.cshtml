@@ -1,0 +1,71 @@
+﻿@model wx.wx_chat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>wx_chat</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChatRoomID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChatRoomID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FromID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FromID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Content)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Content)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ImageID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ImageID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VoiceID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VoiceID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TimeStamp)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TimeStamp)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OwnerID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OwnerID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

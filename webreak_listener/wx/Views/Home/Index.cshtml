@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>微信看看</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @*@Scripts.Render("~/bundles/jquery")*@
+        
+        <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+        @*<script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.custom.js"></script>*@
+        <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-ui-sliderAccess.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.signalR-1.1.3.min.js"></script>
+        <script type="text/javascript" src="~/Signalr/Hubs"></script>
+    </head>
+    <body>
+        <div id="body">
+            <section >
+                <div >
+                    <p>
+                        <a href="Images/tutorial/effect_1.jpg"><b>这个是网站的实际截图</b></a>
+                    </p>
+                    
+                    <b>如何使用微信看看</b>
+                    <div id="divToggle">
+                        <p>
+                            1) <a href="http://www.firefox.com.cn/download/">http://www.firefox.com.cn/download/</a> 安装火狐浏览器
+                        </p>
+                        <p>
+                            2) 在火狐浏览器中安装插件firebug: 
+                            <br/>
+                            点击"附加组件"
+                            <br/>
+                            <img alt="" src="Images/tutorial/click_ff_menu.jpg" />
+                            <br/><br/>
+                            在"获取附加组件"边框栏里查找"firebug"
+                            <br/>
+                            <img alt="" src="Images/tutorial/find_firebug.jpg" />
+                            <br/><br/>
+                            点击安装firebug
+                            <br/>
+                            <img alt="" src="Images/tutorial/install_firebug.jpg" />
+                        </p>
+                        <p>
+                            3) <a href="Images/tutorial/wxkankan.xpi"><b>点击这里</b></a>下载微信看看插件wxkankan.xpi文件,并在火狐浏览器中安装
+                            <br/>
+                            点击齿轮图标，然后点击"从文件安装附加组件"，然后选中你刚才下载的wxkankan.xpi文件
+                            <br/>
+                            <img alt="" src="Images/tutorial/install_wxkankan.jpg" />
+                            <br/><br/>
+                            点击"立刻安装"
+                            <br/>
+                            <img alt="" src="Images/tutorial/install_wxkankan_2.jpg" />
+                            <br/><br/>
+                            重启火狐浏览器
+                            <br/>
+                            <img alt="" src="Images/tutorial/restart_ff.jpg" />
+                        </p>
+                        <p>
+                            4) 打开微信网络版网页，即在火狐地址栏输入wx.qq.com,但是暂时不要登录。点击右上角firebug图标，使之激活(变亮)。
+                            <br/>
+                            <img alt="" src="Images/tutorial/activate_firebug.jpg" />
+                            <br/><br/>
+                            同时点击一下”启用所有面板“用来启用所有firebug的面板
+                            <br/>
+                            <img alt="" src="Images/tutorial/activate_allpanel.jpg" />
+                        </p>
+                        <p>
+                            5) 登录wx.qq.com.然后按F12键，呼出firebug面板，最后一个面板就是我们的”微信看看“面板。点击”点击此处得到一个新的对应我ID的微信看看连接“，你就会得到一个只属于你的微信看看连接了。
+                            <br/>
+                            <img alt="" src="Images/tutorial/get_login_url.jpg" />
+                            <br/><br/>
+                            快去试试吧，你以后的所有的消息记录都在微信看看里了。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section >
+                <div >
+                    <b>已实现的功能</b>
+                    <br/>
+                    - 无需登录即可查看自己所有历史记录
+                    <br />
+                    - 图片，声音，文字，统统记录在案
+                    <br/>
+                    - 按你所需，你和每个朋友，群的记录分开保存
+                    <br/>
+                    - 强大的搜索功能，除了消息内容，还可以按朋友搜索，也可以按时间搜索
+                    <br/>
+                    - 实时显示你所收到的消息，包括图片和声音
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <b>将实现的功能</b>
+                    <br/>
+                    - 分享(让别人也可以看见)你所指定的对话
+                    <br/>
+                    - 自己设置密码,加密所有的对话内容
+                </div>
+            </section>
+        </div>
+</body>
+
+</html>
+
+

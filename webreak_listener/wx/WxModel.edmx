@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cloudjunsqlModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="cloudjunsqlModelStoreContainer">
+          <EntitySet Name="wx_chat" EntityType="cloudjunsqlModel.Store.wx_chat" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="wx_owner_chat_map" EntityType="cloudjunsqlModel.Store.wx_owner_chat_map" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="wx_permission" EntityType="cloudjunsqlModel.Store.wx_permission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="wx_user" EntityType="cloudjunsqlModel.Store.wx_user" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="wx_chat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ImageID" Type="int" />
+          <Property Name="VoiceID" Type="int" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FromUsername" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="bigint" Nullable="false" />
+          <Property Name="CounterPartyID" Type="int" Nullable="false" />
+          <Property Name="IsFromOwner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wx_owner_chat_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="ChatID" Type="bigint" Nullable="false" />
+          <Property Name="CounterPartyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wx_permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="CounterPartyID" Type="int" Nullable="false" />
+          <Property Name="IsPublic" Type="bit" Nullable="false" />
+          <Property Name="PermittedUserList" Type="varchar(max)" />
+          <Property Name="SecretWord" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="wx_user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Uin" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="HeadImg" Type="varchar(max)" />
+          <Property Name="IsChatroom" Type="bit" Nullable="false" />
+          <Property Name="ChatroomMasterID" Type="bigint" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SignalrID" Type="nvarchar" MaxLength="1000" />
+          <Property Name="GuidUrl" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cloudjunsqlModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cloudjunsqlEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="wx_chat" EntityType="cloudjunsqlModel.wx_chat" />
+          <EntitySet Name="wx_owner_chat_map" EntityType="cloudjunsqlModel.wx_owner_chat_map" />
+          <EntitySet Name="wx_permission" EntityType="cloudjunsqlModel.wx_permission" />
+          <EntitySet Name="wx_user" EntityType="cloudjunsqlModel.wx_user" />
+        </EntityContainer>
+        <EntityType Name="wx_chat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="Content" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ImageID" />
+          <Property Type="Int32" Name="VoiceID" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FromUsername" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="CreateTime" Nullable="false" />
+          <Property Type="Int32" Name="CounterPartyID" Nullable="false" />
+          <Property Type="Boolean" Name="IsFromOwner" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wx_owner_chat_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+          <Property Type="Int64" Name="ChatID" Nullable="false" />
+          <Property Type="Int32" Name="CounterPartyID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wx_permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+          <Property Type="Int32" Name="CounterPartyID" Nullable="false" />
+          <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+          <Property Type="String" Name="PermittedUserList" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SecretWord" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="wx_user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="Uin" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NickName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HeadImg" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsChatroom" Nullable="false" />
+          <Property Type="Int64" Name="ChatroomMasterID" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SignalrID" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GuidUrl" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cloudjunsqlModelStoreContainer" CdmEntityContainer="cloudjunsqlEntities">
+          <EntitySetMapping Name="wx_chat">
+            <EntityTypeMapping TypeName="cloudjunsqlModel.wx_chat">
+              <MappingFragment StoreEntitySet="wx_chat">
+                <ScalarProperty Name="IsFromOwner" ColumnName="IsFromOwner" />
+                <ScalarProperty Name="CounterPartyID" ColumnName="CounterPartyID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="FromUsername" ColumnName="FromUsername" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="VoiceID" ColumnName="VoiceID" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wx_owner_chat_map">
+            <EntityTypeMapping TypeName="cloudjunsqlModel.wx_owner_chat_map">
+              <MappingFragment StoreEntitySet="wx_owner_chat_map">
+                <ScalarProperty Name="CounterPartyID" ColumnName="CounterPartyID" />
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wx_permission">
+            <EntityTypeMapping TypeName="cloudjunsqlModel.wx_permission">
+              <MappingFragment StoreEntitySet="wx_permission">
+                <ScalarProperty Name="SecretWord" ColumnName="SecretWord" />
+                <ScalarProperty Name="PermittedUserList" ColumnName="PermittedUserList" />
+                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+                <ScalarProperty Name="CounterPartyID" ColumnName="CounterPartyID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wx_user">
+            <EntityTypeMapping TypeName="cloudjunsqlModel.wx_user">
+              <MappingFragment StoreEntitySet="wx_user">
+                <ScalarProperty Name="GuidUrl" ColumnName="GuidUrl" />
+                <ScalarProperty Name="SignalrID" ColumnName="SignalrID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ChatroomMasterID" ColumnName="ChatroomMasterID" />
+                <ScalarProperty Name="IsChatroom" ColumnName="IsChatroom" />
+                <ScalarProperty Name="HeadImg" ColumnName="HeadImg" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Uin" ColumnName="Uin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

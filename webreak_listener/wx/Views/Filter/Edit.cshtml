@@ -1,0 +1,94 @@
+﻿@model wx.wx_chat
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>wx_chat</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChatRoomID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChatRoomID)
+            @Html.ValidationMessageFor(model => model.ChatRoomID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FromID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FromID)
+            @Html.ValidationMessageFor(model => model.FromID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ToID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ToID)
+            @Html.ValidationMessageFor(model => model.ToID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Content)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Content)
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImageID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ImageID)
+            @Html.ValidationMessageFor(model => model.ImageID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VoiceID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VoiceID)
+            @Html.ValidationMessageFor(model => model.VoiceID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeStamp)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TimeStamp)
+            @Html.ValidationMessageFor(model => model.TimeStamp)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OwnerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OwnerID)
+            @Html.ValidationMessageFor(model => model.OwnerID)
+        </div>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

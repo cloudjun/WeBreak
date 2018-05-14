@@ -1,0 +1,24 @@
+﻿@model IEnumerable<wx.Models.ChatDto>
+@{
+    //ViewBag.Title = "置顶";
+}
+<table id="messages"> 
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+    </tr>
+}
+  
+
+</table>

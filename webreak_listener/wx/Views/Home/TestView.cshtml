@@ -1,0 +1,28 @@
+﻿@using MVC.Controls
+@using MVC.Controls.Tab
+@model KeyValuePair<int, IEnumerable<KeyValuePair<int, string>>>
+
+@{
+    ViewBag.Title = "TestView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+    TabControl tabs = new TabControl()
+        .SetCacheTabs(true);
+    //.AddTabItem(new TabItem()
+    //    .SetContent(MVC.Controls.ContentType.PartialView, "TestPartialView", this.Model)
+    //    .SetTitle("PartialView Tab"))
+    tabs.AddTabItem(new TabItem()
+                    .SetContent(MVC.Controls.ContentType.Static, "<b>Default</b><br /><br />")
+                    .SetTitle("What do you want to see here?"));
+
+    foreach (var item in Model.Value)
+    {
+        string query = string.Format("TestPartialView?ownerId={0}&counterPartyId={1}", Model.Key, item.Key);
+        string tabName = string.IsNullOrEmpty(item.Value) ? "无名氏" : item.Value;
+        
+        tabs.AddTabItem(new TabItem()
+                    .SetContent(MVC.Controls.ContentType.RemoteAction, query)
+                    .SetTitle(tabName));
+    }
+}
+@Html.Tab(tabs)

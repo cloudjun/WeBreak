@@ -1,0 +1,55 @@
+﻿@using wx
+@model IEnumerable<wx.Models.ChatDto>
+@{
+    //ViewBag.Title = "置顶";
+    string contentSrc = "";
+}
+<table id="messages">
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @if (item.IsFromOwner)
+            {
+                @Html.DisplayFor(modelItem => item.OwnerUserNickname)
+            }
+            else
+            {
+                 if (!string.IsNullOrEmpty(item.FromUsername))
+                 {
+                     @Html.DisplayFor(modelItem => item.FromUserNickname)
+                 }
+                 else
+                 {
+                     @Html.DisplayFor(modelItem => item.CounterPartyUserNickname)
+                 }
+            }
+        </td>
+        <td>
+            @if (item.Content != null)
+            {
+                 if (item.Content.StartsWith(("img:")))
+                 {
+                     contentSrc = "<img src='data:image/jpeg;base64," + item.Content.Substring(4) + "'/>";
+                     @Html.Raw(contentSrc)
+                 }
+                 else if (item.Content.StartsWith("voice:"))
+                 {
+                     contentSrc = "<audio controls> <source src='data:audio/mpeg;base64," + item.Content.Substring(6) + "'></audio>";
+                     @Html.Raw(contentSrc)
+                 }
+                 else
+                 {
+                     @Html.DisplayFor(modelItem => item.Content)
+                 }
+            }
+        </td>
+    </tr>
+}
+
+</table>

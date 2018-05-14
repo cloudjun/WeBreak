@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @*@Scripts.Render("~/bundles/jquery")*@
+        
+        <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+        @*<script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.custom.js"></script>*@
+        <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.24.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-ui-sliderAccess.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.signalR-1.1.3.min.js"></script>
+        <script type="text/javascript" src="~/Signalr/Hubs"></script>
+
+        <script type="text/javascript">
+            (function ($) {
+                $.QueryString = (function (a) {
+                    if (a == "") return {};
+                    var b = {};
+                    for (var i = 0; i < a.length; ++i) {
+                        var p = a[i].split('=');
+                        if (p.length != 2) continue;
+                        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                    }
+                    return b;
+                })(window.location.search.substr(1).split('&'))
+            })(jQuery);
+
+            // ownerId is the guid part
+            var ownerId = $.QueryString["oid"];
+            $('[name="oid"]').value = ownerId;
+                
+            $(function() {
+                //Create Hub on Air
+                $.connection.hub.qs = { 'ownerId': ownerId };
+                var chat = $.connection.chat;
+
+                //Client Side Method To Access From Server Side Method
+                chat.client.addMessage = function (chatMessage) {
+                    var content = chatMessage.Content;
+                    if (chatMessage.Content.indexOf("img:") == 0) {
+                        // this is image binary data
+                        content = '<img src="data:image/jpeg;base64,' + chatMessage.Content.substr(4, chatMessage.Content.length - 3) + '" />';
+                    } else if (chatMessage.Content.indexOf("voice:") == 0) {
+                        content = '<audio controls><source src="data:audio/mpeg;base64,' + chatMessage.Content.substr(6, chatMessage.Content.length - 5) + '"></audio>';
+                    }
+
+                    //var d = new Date(chatMessage.TimeStamp);
+                    var username = chatMessage.CounterPartyUserNickname;
+                    if (chatMessage.FromUsername)
+                        username = chatMessage.FromUserNickname;
+                    var tr = '<tr bgcolor=\"#EBFFE0\">'
+                        + '<td>' + chatMessage.ID + '</td>'
+                        //+ '<td>' + js_yyyy_mm_dd_hh_mm_ss(d) + '</td>'
+                        + '<td>' + chatMessage.CreateTime + '</td>'
+                        + '<td>' + username + '</td>'
+                        + '<td>' + content + '</td>'
+                        + '</tr>';
+                    $('#messages').append(tr);
+                };
+
+                //Hub Starting
+                $.connection.hub.start();
+
+                var picker = $('#search_start_time');
+                picker.datetimepicker();
+                
+                function toggle() {
+                    var selectedEffect = 'blind';
+                    var options = {};
+                    $("#divToggle").toggle(selectedEffect, options, 500);
+                };
+
+                $("#topButton").click(function () {
+                    toggle();
+                    return false;
+                });
+                $("#topButton").click();
+            });
+
+            function clearfields() {
+                if ($("#search_name").val() == '人名') {
+                    $("#search_name").val("");
+                }
+                if ($("#search_content").val() == '内容') {
+                    $("#search_content").val("");
+                }
+                if ($("#search_start_time").val() == '起始时间') {
+                    $("#search_start_time").val("");
+                } 
+            }
+            
+            function js_yyyy_mm_dd_hh_mm_ss(date) {
+                year = "" + date.getFullYear();
+                month = "" + (date.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+                day = "" + date.getDate(); if (day.length == 1) { day = "0" + day; }
+                hour = "" + date.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+                minute = "" + date.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+                second = "" + date.getSeconds(); if (second.length == 1) { second = "0" + second; }
+                return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+            }
+        </script>
+        
+        <!-- MVC.Controls --> 
+        @MVC.Controls.MVCControlsScriptManager.Instance.RegisterScriptsAndStyles()
+        <!-- End of MVC.Controls -->
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("微信看看", "Index", "Home")</p>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            <section class="featured">
+                <div class="content-wrapper">
+                    @*<hgroup class="title">
+                        <h1>@ViewBag.Title.</h1>
+                        <h2>@ViewBag.Message</h2>
+                    </hgroup>*@
+                    <b><a href="http://wxkankan.azurewebsites.net">如何使用微信看看</a></b>
+                </div>
+            </section>
+
+            <section class="content-wrapper main-content clear-fix">
+                <table>
+                    <tr>
+                        @using (Html.BeginForm("Search", "Filter", FormMethod.Get))
+                        {
+                            <td>
+                                @Html.TextBox("search_name", "人名", new {onclick="clearfields()"})
+                            </td>
+                            <td>
+                                @Html.TextBox("search_content", "内容", new {onclick="clearfields()"})
+                            </td>
+                            <td>
+                                @Html.TextBox("search_start_time", "起始时间")
+                            </td>
+                            <td>
+                                @Html.Hidden("oid")
+                                <input type="submit" value="我搜" />
+                            </td>
+                        }
+                    </tr>
+                </table>
+                @RenderBody()
+                <table id="messages" />
+            </section>
+        </div>
+        
+        @*<footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>*@
+
+        @*@Scripts.Render("~/bundles/jquery")*@
+        @RenderSection("scripts", required: false)
+    </body>
+
+</html>
